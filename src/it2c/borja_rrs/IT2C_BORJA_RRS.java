@@ -17,11 +17,11 @@ public class IT2C_BORJA_RRS {
         do {
 
             System.out.println("-------------------------------------");
-            System.out.println("|  WELCOME TO DELIVERY APP SYSTEM |");
+            System.out.println("|  WELCOME TO RESTAURANT RESERVATION SYSTEM |");
             System.out.println("-------------------------------------");
             System.out.println("1. CUSTOMER");
             System.out.println("2. TABLES");
-            
+            System.out.println("3. RESERVATION");
             
             System.out.println("5. EXIT");
 
@@ -51,20 +51,13 @@ public class IT2C_BORJA_RRS {
                   
                 case 3:
                     
-//                    Order ord = new Order();
-//                    ord.Ordering();
-                   
+                  Reservations rs = new Reservations ();
+                  rs.ReservationsMenu();
                     break;
+
+                
 
                 case 4:
-                    
-  
-                    
-                    
-                    
-                    break;
-
-                case 5:
                     System.out.println("Exiting the program. Type 'yes to coninue: !");
                     response = sc.next();
                     if(response.equalsIgnoreCase("yes")){

@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Config {
 
@@ -22,6 +23,8 @@ public static Connection connectDB() {
         }
         return con;
     }
+
+
 
   public void addRecords(String sql, Object... values) {
     try (Connection conn = this.connectDB(); // Use the connectDB method
@@ -56,6 +59,10 @@ public static Connection connectDB() {
         System.out.println("Error adding record: " + e.getMessage());
     }
 }
+  void addReservation(String sql, String name, String contact, int numPeople, String Seaters) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
   
   public void viewRecords(String sqlQuery, String[] columnHeaders, String[] columnNames) {
        
@@ -127,6 +134,10 @@ public static Connection connectDB() {
             System.out.println("Error updating record: " + e.getMessage());
         }
     }
+   
+    void updateReservation(String qry, String name, String contact, int numPeople, String reservationTime, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
   
     
     
@@ -148,6 +159,7 @@ public static Connection connectDB() {
         System.out.println("Error deleting record: " + e.getMessage());
     }
     
+   
               }
               
               private void setPreparedStatementValues(PreparedStatement pstmt, Object... values) throws SQLException {
@@ -191,8 +203,83 @@ public static Connection connectDB() {
         return result;
     }
 
+   
+    //-----------------------------------------------
+    // GET SINGLE VALUE METHOD
+    //-----------------------------------------------
     
+    
+    public void fetchTableDetails(int unitId) {
+        String sql = "SELECT * FROM Tables WHERE table_id = ?";
 
+        try (Connection conn = connectDB();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, unitId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+
+                    String brand = rs.getString("cr_brand");
+                    String model = rs.getString("cr_model");
+                    String rentalcost = rs.getString("cr_rentalcostperday");
+                    String status = rs.getString("cr_status");
+
+                    System.out.println("-------------------------------------");
+                    System.out.println("             CAR DETAILS             ");
+                    System.out.println("-------------------------------------");
+                    System.out.printf("\nUnit ID: %s", unitId);
+                    System.out.printf("\nBrand: %s", brand);
+                    System.out.printf("\nModel: %s", model);
+                    System.out.printf("\nRental Cost Perday: P%s", rentalcost);
+                    System.out.printf("\nStatus: %s\n", status);
+                } else {
+                    System.out.printf("No Car Found with this ID: %s", unitId);
+    
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching Car details: " + e.getMessage());
+        }
+    }
+    public void payment(int unitId) {
+        Scanner input = new Scanner(System.in);
+        String sql = "SELECT cr_rentalcostperday FROM cars WHERE cr_id = ?";
+
+        try (Connection conn = connectDB();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, unitId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+
+                String monthlyRental = rs.getString("cr_rentalcostperday");
+                System.out.println("-------------------------------------");
+                System.out.println("           PAYMENT PROCESS           ");
+                System.out.println("-------------------------------------");
+
+                System.out.printf("Amount needed to pay: %s\n", monthlyRental);
+
+                System.out.print("Enter amount to pay: ");
+                int pay = input.nextInt();
+
+                System.out.printf("You have successfully rented Car ID. %s\n", unitId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching Car details for payment: " + e.getMessage());
+        }
+    }
+
+    void deleteRecord(String qry, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
+
+  
     
 }
+
+
+    
+
 

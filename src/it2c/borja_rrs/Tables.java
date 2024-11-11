@@ -10,55 +10,58 @@ public class Tables {
     public void addTable() {
         Scanner sc = new Scanner(System.in);
         Config conf = new Config();
-        System.out.println("Customer Name: ");
+        System.out.println("Enter number Table Seaters: ");
         String fname = sc.next();
-        System.out.println("Customer Address: ");
+        System.out.println("Enter Table's Location: ");
         String lname = sc.next();
-        System.out.println("Contact-Number: ");
+        System.out.println("Enter Table Status: ");
         String address = sc.next();
-        System.out.println("Seaters: ");
+        System.out.println("Enter reserved date: ");
         String contact_number = sc.next();
        
-        String sql = "INSERT INTO Tables (c_name, c_address, contactnum, seaters) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Tables (c_seats, c_location, status, reserved_date) VALUES (?, ?, ?, ?)";
         conf.addRecords(sql, fname, lname, address, contact_number);
     }
     
-    private void viewTable() {
+    public void viewTable() {
         String cqry = "SELECT * FROM Tables";
-        String[] votersHeaders = {"customer_id", "c_Name", "c_address", "contactnum", "seaters"};
-        String[] votersColumns = {"customer_id", "c_name", "c_address", "contactnum", "seaters"};
+        String[] votersHeaders = {"Table Number", "Seats", "Location", "Status", "Teserved Date"};
+        String[] votersColumns = {"Table_id", "c_seats", "c_Location", "Status", "Reserved_date"};
         Config conf = new Config();
         conf.viewRecords(cqry, votersHeaders, votersColumns);
     }
     
     private void updateTable(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Customer Name ");
+        System.out.println("Enter new Table Seaters ");
         int id = sc.nextInt();
         
-        System.out.println("Enter the new Customer Address");
-        String address = sc.next();
+        System.out.println("Enter the new Table's Location");
+        String tLocation = sc.next();
         
-        System.out.println("Enter the new Contact Number");
-        String contact = sc.next();
+        System.out.println("Enter the new Table Status");
+        String tStatus = sc.next();
+        
+        System.out.println("Enter the new reserved date");
+        String rDate = sc.next();
         
         
-        String qry = "UPDATE Tables SET c_address = ?, contactnum = ? WHERE customer_id = ?";
+        String qry = "UPDATE Tables SET c_seats = ?, reserved_date = ?,c_location = ?, status = ? WHERE table_id = ?";
         
         Config conf = new Config();
-        conf.updateRecords(qry, address, contact, id);
+        conf.updateRecords(qry, tLocation, rDate, tStatus, id);
     }
     
     public void deleteTable() {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Enter ID to Delete: ");
+        System.out.print("Enter Table Number to Delete: ");
         int id = input.nextInt();
 
         Config conf = new Config();
 
-        String sqlDelete = "DELETE FROM Tables WHERE customer_id = ?";
+        String sqlDelete = "DELETE FROM Tables WHERE table_id = ?";
 
         conf.deleteRecords(sqlDelete, id);
 

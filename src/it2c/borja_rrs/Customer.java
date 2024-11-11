@@ -20,7 +20,7 @@ public class Customer {
         conf.addRecords(sql, fname, lname, address, contact_number);
     }
 
-    private void viewCustomer() {
+    public void viewCustomer() {
         String cqry = "SELECT * FROM Customer";
         String[] votersHeaders = {"ID", "First Name", "Last Name", "Address", "Contact Number"};
         String[] votersColumns = {"customer_id", "fname", "lname", "address", "contactnum"};
