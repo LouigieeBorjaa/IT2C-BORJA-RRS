@@ -15,6 +15,16 @@ public class Customer {
         String address = sc.next();
         System.out.println("contact-number: ");
         String contact_number = sc.next();
+        
+        while (true) {
+        System.out.print("Customers Contact Number (digits only): ");
+        contact_number = sc.next();
+        if (contact_number.matches("\\d+")) { 
+            break;
+        } else {
+            System.out.print("Invalid input! Please enter digits only.");
+        }
+    }
 
         String sql = "INSERT INTO Customer (fname, lname, address, contactnum) VALUES (?, ?, ?, ?)";
         conf.addRecords(sql, fname, lname, address, contact_number);
@@ -38,6 +48,17 @@ public class Customer {
 
         System.out.println("Enter the new Contact Number");
         String contact = sc.next();
+        
+        while (true) {
+        System.out.print("Customers Contact Number (numbers only): ");
+        contact = sc.next();
+        if (contact.matches("\\d+")) { 
+            break;
+        } else {
+            System.out.print("Invalid input! Please enter Numbers only.");
+        }
+    }
+        
 
         String qry = "UPDATE Customer SET address = ?, contactnum = ? WHERE customer_id = ?";
 

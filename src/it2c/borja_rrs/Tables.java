@@ -11,17 +11,32 @@ public class Tables {
         Scanner sc = new Scanner(System.in);
         Config conf = new Config();
         System.out.println("Enter number Table Seaters: ");
-        String fname = sc.next();
+        String seaters = sc.next();
         System.out.println("Enter Table's Location: ");
-        String lname = sc.next();
+        String location = sc.next();
         System.out.println("Enter Table Status: ");
-        String address = sc.next();
-        System.out.println("Enter reserved date: ");
-        String contact_number = sc.next();
+        String status = sc.next();     
+        
        
+      
+    
+   
+          System.out.println("Enter reserved date: ");
+        String reserveD = sc.next();
+            
+        while (true) {
+        System.out.print("Customers Contact Number (numbers only): ");
+        reserveD = sc.next();
+        if (reserveD.matches("\\d+")) { 
+            break;
+        } else {
+            System.out.print(" Please enter Numbers only.");
+        }
+        }
+         
         String sql = "INSERT INTO Tables (c_seats, c_location, status, reserved_date) VALUES (?, ?, ?, ?)";
-        conf.addRecords(sql, fname, lname, address, contact_number);
-    }
+        conf.addRecords(sql, seaters, location, status, reserveD);
+         }
     
     public void viewTable() {
         String cqry = "SELECT * FROM Tables";

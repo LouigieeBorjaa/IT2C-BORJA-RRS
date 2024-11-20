@@ -130,8 +130,9 @@ public class Reservations {
         String Seaters = input.nextLine();
 
         // SQL query to insert reservation into the table
-        String sql = "INSERT INTO reservations (customer_name, contactnum, num_people, reservation_seaters VALUES (?, ?, ?, ?)";
-        conf.addReservation(sql, name, contact, numPeople, Seaters);
+        String sql = "INSERT INTO Reservations (customer_name, contactnum, num_people, reservation_seaters)"
+                + " VALUES (?, ?, ?, ?)";
+        conf.addRecords(sql, name, contact, numPeople, Seaters);
     }
 
     // Method to view all table reservations
@@ -169,7 +170,7 @@ public class Reservations {
         String qry = "UPDATE reservations SET customer_name = ?, contact = ?, num_people = ?, reservation_time = ? WHERE res_id = ?";
 
         Config conf = new Config();
-        conf.updateReservation(qry, name, contact, numPeople, reservationTime, id);
+        conf.updateRecords(qry, name, contact, numPeople, reservationTime, id);
     }
 
     // Method to delete a reservation
@@ -181,7 +182,7 @@ public class Reservations {
         String qry = "DELETE FROM reservations WHERE res_id = ?";
 
         Config conf = new Config();
-        conf.deleteRecord(qry, id);
+        conf.deleteRecords(qry, id);
     }
 
     // Main menu for table reservation operations

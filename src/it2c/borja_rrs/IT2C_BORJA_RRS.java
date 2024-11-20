@@ -22,6 +22,7 @@ public class IT2C_BORJA_RRS {
             System.out.println("1. CUSTOMER");
             System.out.println("2. TABLES");
             System.out.println("3. RESERVATION");
+            System.out.println("4. REPORTS");
             
             System.out.println("5. EXIT");
 
