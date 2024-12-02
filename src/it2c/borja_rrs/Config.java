@@ -135,12 +135,10 @@ public static Connection connectDB() {
     }
    
     void updateRecords(String qry, String name, String contact, int numPeople, String reservationTime, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
     }
-  
     
-    
-              public void deleteRecords(String sql, Object... values) {
+    public void deleteRecords(String sql, Object... values) {
     try (Connection conn = this.connectDB();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {
 

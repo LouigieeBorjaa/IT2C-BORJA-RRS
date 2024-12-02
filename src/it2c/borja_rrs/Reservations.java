@@ -1,7 +1,4 @@
-
 package it2c.borja_rrs;
-
-
 
 import java.util.Scanner;
 
@@ -12,24 +9,64 @@ public class Reservations {
         Scanner input = new Scanner(System.in);
         Config conf = new Config();
 
-        // Collecting user input for reservation details
-        System.out.print("Enter Customer Name: ");
-        String name = input.nextLine();
+        // Validate customer name (alphabetic characters and spaces only)
+        String name;
+        while (true) {
+            System.out.print("Enter Customer Name: ");
+            name = input.nextLine();
+            if (name.matches("[a-zA-Z ]+")) {
+                break;
+            } else {
+                System.out.println("Invalid input! Customer name must only contain letters and spaces.");
+            }
+        }
 
-        System.out.print("Enter Contact Number: ");
-        String contact = input.nextLine();
+        // Validate contact number (digits only and 11 digits length)
+        String contact;
+        while (true) {
+            System.out.print("Enter Contact Number (11 digits only): ");
+            contact = input.nextLine();
+            if (contact.matches("\\d{11}")) { // Exactly 11 digits
+                break;
+            } else {
+                System.out.println("Invalid input! Contact number must be exactly 11 digits.");
+            }
+        }
 
-        System.out.print("Enter Number of People: ");
-        int numPeople = input.nextInt();
-        input.nextLine(); // Consume the leftover newline
+        // Validate number of people (positive integer)
+        int numPeople;
+        while (true) {
+            System.out.print("Enter Number of People: ");
+            if (input.hasNextInt()) {
+                numPeople = input.nextInt();
+                if (numPeople > 0) {
+                    break;
+                } else {
+                    System.out.println("Invalid input! Number of people must be greater than 0.");
+                }
+            } else {
+                System.out.println("Invalid input! Please enter a valid integer for number of people.");
+                input.next(); // Consume invalid input
+            }
+        }
+        input.nextLine(); // Consume newline left by nextInt()
 
-        System.out.print("Enter Number of Seaters: ");
-        String Seaters = input.nextLine();
+        // Validate number of seats (positive integer)
+        String seats;
+        while (true) {
+            System.out.print("Enter Number of Seaters: ");
+            seats = input.nextLine();
+            if (seats.matches("\\d+") && Integer.parseInt(seats) > 0) {
+                break;
+            } else {
+                System.out.println("Invalid input! Please enter a positive integer for seats.");
+            }
+        }
 
         // SQL query to insert reservation into the table
-        String sql = "INSERT INTO Reservations (customer_name, contactnum, num_people, reservation_seaters)"
-                + " VALUES (?, ?, ?, ?)";
-        conf.addRecords(sql, name, contact, numPeople, Seaters);
+        String sql = "INSERT INTO Reservations (customer_name, contactnum, num_people, reservation_seaters) "
+                + "VALUES (?, ?, ?, ?)";
+        conf.addRecords(sql, name, contact, numPeople, seats);
     }
 
     // Method to view all table reservations
@@ -39,45 +76,113 @@ public class Reservations {
         String[] clmns = {"res_id", "customer_name", "contact", "num_people", "reservation_seaters"};
 
         Config conf = new Config();
-
         conf.viewRecords(tqry, hrds, clmns);
     }
 
     // Method to update a table reservation
     private void updateReservation() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Reservation ID to Update: ");
-        int id = sc.nextInt();
+
+        // Validate Reservation ID (positive integer)
+        int id;
+        while (true) {
+            System.out.print("Enter Reservation ID to Update: ");
+            if (sc.hasNextInt()) {
+                id = sc.nextInt();
+                if (id > 0) {
+                    break;
+                } else {
+                    System.out.println("Invalid input! Reservation ID must be greater than 0.");
+                }
+            } else {
+                System.out.println("Invalid input! Please enter a valid integer for Reservation ID.");
+                sc.next(); // Consume invalid input
+            }
+        }
         sc.nextLine(); // Consume newline
 
-        System.out.print("Enter new Customer Name: ");
-        String name = sc.nextLine();
+        // Validate customer name (alphabetic characters and spaces only)
+        String name;
+        while (true) {
+            System.out.print("Enter new Customer Name: ");
+            name = sc.nextLine();
+            if (name.matches("[a-zA-Z ]+")) {
+                break;
+            } else {
+                System.out.println("Invalid input! Customer name must only contain letters and spaces.");
+            }
+        }
 
-        System.out.print("Enter new Contact Number: ");
-        String contact = sc.nextLine();
+        // Validate contact number (11 digits only)
+        String contact;
+        while (true) {
+            System.out.print("Enter new Contact Number (11 digits only): ");
+            contact = sc.nextLine();
+            if (contact.matches("\\d{11}")) { 
+                break;
+            } else {
+                System.out.println("Invalid input! Contact number must be exactly 11 digits.");
+            }
+        }
 
-        System.out.print("Enter new Number of People: ");
-        int numPeople = sc.nextInt();
+        // Validate number of people (positive integer)
+        int numPeople;
+        while (true) {
+            System.out.print("Enter new Number of People: ");
+            if (sc.hasNextInt()) {
+                numPeople = sc.nextInt();
+                if (numPeople > 0) {
+                    break;
+                } else {
+                    System.out.println("Invalid input! Number of people must be greater than 0.");
+                }
+            } else {
+                System.out.println("Invalid input! Please enter a valid integer for number of people.");
+                sc.next(); // Consume invalid input
+            }
+        }
         sc.nextLine(); // Consume newline
 
-        System.out.print("Enter new Number of Seaters): ");
-        String reservationTime = sc.nextLine();
+        // Validate number of seats (positive integer)
+        String reservationSeaters;
+        while (true) {
+            System.out.print("Enter new Number of Seaters: ");
+            reservationSeaters = sc.nextLine();
+            if (reservationSeaters.matches("\\d+") && Integer.parseInt(reservationSeaters) > 0) {
+                break;
+            } else {
+                System.out.println("Invalid input! Please enter a positive integer for seats.");
+            }
+        }
 
         // SQL query to update reservation details
-        String qry = "UPDATE reservations SET customer_name = ?, contact = ?, num_people = ?, reservation_time = ? WHERE res_id = ?";
-
+        String qry = "UPDATE reservations SET customer_name = ?, contact = ?, num_people = ?, reservation_seaters = ? WHERE reservaion_id = ?";
         Config conf = new Config();
-        conf.updateRecords(qry, name, contact, numPeople, reservationTime, id);
+        conf.updateRecords(qry, name, contact, numPeople, reservationSeaters, id);
     }
 
     // Method to delete a reservation
     private void deleteReservation() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Reservation ID to Delete: ");
-        int id = sc.nextInt();
+
+        // Validate Reservation ID (positive integer)
+        int id;
+        while (true) {
+            System.out.print("Enter Reservation ID to Delete: ");
+            if (sc.hasNextInt()) {
+                id = sc.nextInt();
+                if (id > 0) {
+                    break;
+                } else {
+                    System.out.println("Invalid input! Reservation ID must be greater than 0.");
+                }
+            } else {
+                System.out.println("Invalid input! Please enter a valid integer for Reservation ID.");
+                sc.next(); // Consume invalid input
+            }
+        }
 
         String qry = "DELETE FROM reservations WHERE res_id = ?";
-
         Config conf = new Config();
         conf.deleteRecords(qry, id);
     }
@@ -138,10 +243,4 @@ public class Reservations {
 
         } while (response.equalsIgnoreCase("yes"));
     }
-
 }
-
-    
-
-
-

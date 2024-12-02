@@ -39,7 +39,7 @@ public class IT2C_BORJA_RRS {
 
                     Tables tbl = new Tables();
 
-                    tbl.tablesop();
+                    tbl.tablesOp();
                     break;
 
                 case 3:
