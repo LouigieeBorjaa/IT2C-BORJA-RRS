@@ -7,34 +7,15 @@ class Reports {
     Config conf = new Config();
 
     public void generalReport() {
-        Config conf = new Config();
 
-        // Reservation Summary
-        String reservationSummaryQuery = "SELECT COUNT(*) AS total_reservations, AVG(num_people) AS avg_people FROM Reservations";
-        String[] reservationSummaryHeaders = {"Total Reservations", "Average Number of People"};
-        String[] reservationSummaryColumns = {"total_reservations", "avg_people"};
-        conf.viewRecords(reservationSummaryQuery, reservationSummaryHeaders, reservationSummaryColumns);
+        Reservations reserve = new Reservations();
 
-        // Table Usage Report
-        String tableUsageQuery = "SELECT table_id, COUNT(*) AS times_reserved FROM Reservations GROUP BY table_id";
-        String[] tableUsageHeaders = {"Table ID", "Times Reserved"};
-        String[] tableUsageColumns = {"table_id", "times_reserved"};
-        conf.viewRecords(tableUsageQuery, tableUsageHeaders, tableUsageColumns);
+        reserve.viewReservations();
 
-        // Customer Demographics
-        String customerDemographicsQuery = "SELECT COUNT(*) AS total_customers FROM Customer";
-        String[] customerDemographicsHeaders = {"Total Customers"};
-        String[] customerDemographicsColumns = {"total_customers"};
-        conf.viewRecords(customerDemographicsQuery, customerDemographicsHeaders, customerDemographicsColumns);
-
-        // Reservation Trends
-        String reservationTrendsQuery = "SELECT DATE(reserved_date) AS date, COUNT(*) AS total_reservations FROM Reservations GROUP BY DATE(reserved_date)";
-        String[] reservationTrendsHeaders = {"Date", "Total Reservations"};
-        String[] reservationTrendsColumns = {"date", "total_reservations"};
-        conf.viewRecords(reservationTrendsQuery, reservationTrendsHeaders, reservationTrendsColumns);
     }
 
     public void individualReport() {
+
         Scanner sc = new Scanner(System.in);
         Config conf = new Config();
 
@@ -52,6 +33,7 @@ class Reports {
         String[] reservationHistoryHeaders = {"Reservation ID", "Customer Name", "Contact", "Number of People", "Reservation Seaters"};
         String[] reservationHistoryColumns = {"reservation_id", "customer_name", "contactnum", "num_people", "reservation_seaters"};
         conf.viewRecords(reservationHistoryQuery, reservationHistoryHeaders, reservationHistoryColumns);
+
     }
 
     public void Report() {

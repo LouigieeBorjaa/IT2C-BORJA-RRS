@@ -1,6 +1,7 @@
 package it2c.borja_rrs;
 
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Reservations {
 
@@ -63,17 +64,23 @@ public class Reservations {
             }
         }
 
+        LocalDate reserveDate = LocalDate.now();
+
         // SQL query to insert reservation into the table
-        String sql = "INSERT INTO Reservations (customer_name, contactnum, num_people, reservation_seaters) "
-                + "VALUES (?, ?, ?, ?)";
-        conf.addRecords(sql, name, contact, numPeople, seats);
+        String sql = "INSERT INTO Reservations (customer_name, contactnum, num_people, reservation_seaters, reserved_date) "
+                + "VALUES (?, ?, ?, ?, ?)";
+        conf.addRecords(sql, name, contact, numPeople, seats, reserveDate);
+        
+        String sql2 = "UPDATE Tables SET status = 'Reserved'";
+        
+
     }
 
     // Method to view all table reservations
     public void viewReservations() {
         String tqry = "SELECT * FROM reservations";
         String[] hrds = {"Reservation ID", "Customer Name", "Contact", "Number of People", "Reservation Seaters"};
-        String[] clmns = {"res_id", "customer_name", "contact", "num_people", "reservation_seaters"};
+        String[] clmns = {"reservation_id", "customer_name", "contactnum", "num_people", "reservation_seaters"};
 
         Config conf = new Config();
         conf.viewRecords(tqry, hrds, clmns);
@@ -118,7 +125,7 @@ public class Reservations {
         while (true) {
             System.out.print("Enter new Contact Number (11 digits only): ");
             contact = sc.nextLine();
-            if (contact.matches("\\d{11}")) { 
+            if (contact.matches("\\d{11}")) {
                 break;
             } else {
                 System.out.println("Invalid input! Contact number must be exactly 11 digits.");

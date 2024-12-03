@@ -11,7 +11,7 @@ public class Customer {
         // Validate first name (alphabetic characters only)
         String fname;
         while (true) {
-            System.out.println("First Name: ");
+            System.out.print("First Name: ");
             fname = sc.next();
             if (fname.matches("[a-zA-Z]+")) {
                 break;
@@ -23,7 +23,7 @@ public class Customer {
         // Validate last name (alphabetic characters only)
         String lname;
         while (true) {
-            System.out.println("Last Name: ");
+            System.out.print("Last Name: ");
             lname = sc.next();
             if (lname.matches("[a-zA-Z]+")) {
                 break;
@@ -36,12 +36,12 @@ public class Customer {
         sc.nextLine(); // Consume newline left by next()
         String address;
         while (true) {
-            System.out.println("Address: ");
+            System.out.print("Address: ");
             address = sc.nextLine();
             if (!address.trim().isEmpty()) {
                 break;
             } else {
-                System.out.println("Address cannot be empty.");
+                System.out.print("Address cannot be empty.");
             }
         }
 
@@ -53,7 +53,7 @@ public class Customer {
             if (contact_number.matches("\\d{11}")) { // Assuming a 11-digit phone number format
                 break;
             } else {
-                System.out.println("Invalid input! Please enter exactly 11 digits.");
+                System.out.print("Invalid input! Please enter exactly 11 digits.");
             }
         }
 
@@ -76,7 +76,7 @@ public class Customer {
         // Validate customer ID (ensure it's a positive integer)
         int id;
         while (true) {
-            System.out.println("Enter Customer ID: ");
+            System.out.print("Enter Customer ID: ");
             if (sc.hasNextInt()) {
                 id = sc.nextInt();
                 if (id > 0) {
@@ -94,7 +94,7 @@ public class Customer {
         sc.nextLine(); // Consume newline
         String address;
         while (true) {
-            System.out.println("Enter the new Address: ");
+            System.out.print("Enter the new Address: ");
             address = sc.nextLine();
             if (!address.trim().isEmpty()) {
                 break;
@@ -151,12 +151,12 @@ public class Customer {
         String response;
 
         do {
-            System.out.println("1. ADD");
-            System.out.println("2. VIEW");
-            System.out.println("3. UPDATE");
-            System.out.println("4. REMOVE");
+            System.out.println("1. ADD CUSTOMER");
+            System.out.println("2. VIEW CUSTOMERS");
+            System.out.println("3. UPDATE CUSTOMER");
+            System.out.println("4. REMOVE CUSTOMER");
 
-            System.out.println("Enter action: ");
+            System.out.print("Enter action: ");
             int action = input.nextInt();
             Customer customer = new Customer();
             switch (action) {

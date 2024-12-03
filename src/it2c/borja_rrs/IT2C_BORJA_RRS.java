@@ -51,9 +51,9 @@ public class IT2C_BORJA_RRS {
                 case 4:
 
                     Reports rps = new Reports();
-                    
+
                     rps.Report();
-                            
+
                     break;
 
                 case 5:
@@ -65,10 +65,6 @@ public class IT2C_BORJA_RRS {
                     break;
 
             }
-        }
-            while (exit);
-        }
-        }
-
-
-
+        } while (exit);
+    }
+}
