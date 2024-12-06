@@ -38,14 +38,13 @@ public class IT2C_BORJA_RRS {
                 case 2:
 
                     Tables tbl = new Tables();
-
                     tbl.tablesOp();
                     break;
 
                 case 3:
 
                     Reservations rs = new Reservations();
-                    rs.ReservationsMenu();
+                    rs.manageReservations();
                     break;
 
                 case 4:

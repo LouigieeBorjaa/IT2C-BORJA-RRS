@@ -26,6 +26,8 @@ public class Tables {
             }
         }
         
+     
+        
         // Validate table location (not empty)
         sc.nextLine(); // Consume newline left by nextInt()
         String location;
@@ -94,12 +96,12 @@ public class Tables {
         Scanner sc = new Scanner(System.in);
         
         // Validate table ID (ensure it's an existing ID)
-        int id;
+        int tid;
         while (true) {
             System.out.print("Enter Table ID to update: ");
             if (sc.hasNextInt()) {
-                id = sc.nextInt();
-                if (id > 0) {
+                tid = sc.nextInt();
+                if (tid > 0) {
                     break;
                 } else {
                     System.out.println("Please enter a valid table ID.");
@@ -167,7 +169,7 @@ public class Tables {
         // SQL Update
         String qry = "UPDATE Tables SET c_seats = ?, c_location = ?, status = ?, reserved_date = ? WHERE table_id = ?";
         Config conf = new Config();
-        conf.updateRecords(qry, seaters, location, status, reserveDate, id);
+        conf.updateRecords(qry, seaters, location, status, reserveDate, tid);
     }
     
     // Method to delete a table
